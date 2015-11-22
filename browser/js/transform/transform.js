@@ -9,7 +9,8 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('TransformController', function ($scope) {
+app.controller('TransformController', function ($scope, $rootScope) {
+  $rootScope.$broadcast('FOO');
   var input = [
     {
       name: 'foo',

@@ -6,6 +6,8 @@ body {
   background: #fdfdfd;
 }
 
+.ace_editor { height: 200px; }
+
 @mixin clearfix {
   &:after {
     content: "";
