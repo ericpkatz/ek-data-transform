@@ -137,7 +137,7 @@ gulp.task('buildCSSProduction', function () {
         .pipe(gulp.dest('./public'))
 });
 
-gulp.task('buildJSProduction', function () {
+gulp.task('buildJSProduction', ['browserify'], function () {
     return gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
         .pipe(concat('main.js'))
         .pipe(babel())
