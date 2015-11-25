@@ -44,4 +44,17 @@
   onChange: aceChanged
 }" ng-bind='output'></div>
             </div>
+            <div class='row'>
+              <div class='col-sm-4'>
+                <div class='alert' ng-class="{'alert-success': !jsonParseError, 'alert-danger': jsonParseError}">
+                  {{ jsonParseError || "Good JSON!" }}
+                
+                </div>
+              </div>
+              <div class='col-sm-4'>
+                <div class='alert alert-info'>Foo</div>
+              </div>
+              <div class='col-sm-4'>
+                <div class='alert alert-info'>Foo</div>
+              </div>
 </section>

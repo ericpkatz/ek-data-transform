@@ -134,7 +134,7 @@ gulp.task('buildCSSProduction', function () {
         .pipe(sass())
         .pipe(rename('style.css'))
         .pipe(minifyCSS())
-        .pipe(gulp.dest('./public'))
+        .pipe(gulp.dest('./public'));
 });
 
 gulp.task('buildJSProduction', ['browserify'], function () {

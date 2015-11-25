@@ -18,7 +18,6 @@ app.controller('TransformController', function ($scope) {
     if([';','}'].indexOf(a[0].lines[0]) !== -1 || !a[1].formatted)
     {
       a[1].formatted = true;
-      console.log(a.formatted);
       var js = a[1].getValue();
       var formattedJS = window.beautify(a[1].getValue()); 
       if(js !== formattedJS)
@@ -55,9 +54,17 @@ app.controller('TransformController', function ($scope) {
 
   var calculateOutput = function(){
     var results = '';
+    var input = [];
+    try {
+      input = JSON.parse( $scope.transform.input);
+    }
+    catch(ex){
+      console.log(ex);
+      $scope.jsonParseError = ex.toString();
+    }
     try {
       var fn = new Function('input', $scope.transform.transformer);
-      results = JSON.stringify(fn(JSON.parse( $scope.transform.input)));
+      results = JSON.stringify(fn(input));
     }
     catch(ex){
     
