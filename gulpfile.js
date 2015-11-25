@@ -39,7 +39,21 @@ gulp.task('lintJS', function () {
 
 });
 
-gulp.task('buildJS', ['lintJS'], function () {
+var browserify = require('gulp-browserify');
+ 
+// Basic usage 
+gulp.task('browserify', function() {
+    // Single entry point to browserify 
+    gulp.src('b.js')
+        .pipe(browserify({
+          insertGlobals : true,
+          debug : !gulp.env.production
+        }))
+        .pipe(gulp.dest('./public/'));
+});
+
+
+gulp.task('buildJS', ['lintJS', 'browserify'], function () {
     return gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
         .pipe(plumber())
         .pipe(sourcemaps.init())

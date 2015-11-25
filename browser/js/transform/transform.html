@@ -1,11 +1,18 @@
 <section id="transform">
-  <div class='form'>
-    <div class='row'>
-      <div class='col-sm-4'>
-    <div class='form-group'>
-      <label for='input'>Input</label>
-      <textarea class='form-control' id='input' ng-model='transform.input' rows='5'></textarea>
-  <div ui-ace="{
+  <div class='row'>
+    <div class='col-sm-4'>
+      <strong>Input</strong>
+    </div>
+    <div class='col-sm-4'>
+      <strong>Transformer</strong> (function(input){ ... })
+    </div>
+    <div class='col-sm-4'>
+      <strong>Output</strong>
+    </div>
+  </div>
+        <div class='row'>
+            <div class='col-sm-4'>
+                    <div ui-ace="{
   useWrapMode : true,
   showGutter: false,
   theme:'twilight',
@@ -14,28 +21,20 @@
   onLoad: aceLoaded,
   onChange: aceChanged
 }" ng-model='transform.input'></div>
-    </div>
-      </div>
-      <div class='col-sm-4'>
-    <div class='form-group'>
-      <label for='transformer'>Transformer</label>
-      <textarea class='form-control' id='transformer' ng-model='transform.transformer' rows='5'></textarea>
-  <div ui-ace="{
+                </div>
+            <div class='col-sm-4'>
+                    <div ui-ace="{
   useWrapMode : true,
-  showGutter: false,
+  showGutter: true,
   theme:'twilight',
-  mode: 'json',
+  mode: 'javascript',
   firstLineNumber: 5,
   onLoad: aceLoaded,
   onChange: aceChanged
 }" ng-model='transform.transformer'></div>
-    </div>
-      </div>
-      <div class='col-sm-4'>
-    <div class='form-group'>
-      <label for='output'>output</label>
-      <textarea class='form-control' id='output' ng-bind='output' rows='5'></textarea>
-  <div ui-ace="{
+                </div>
+                <div class='col-sm-4'>
+                        <div ui-ace="{
   useWrapMode : true,
   showGutter: false,
   theme:'twilight',
@@ -44,8 +43,5 @@
   onLoad: aceLoaded,
   onChange: aceChanged
 }" ng-bind='output'></div>
-    </div>
-      </div>
-    </div>
-  </div>
+            </div>
 </section>
