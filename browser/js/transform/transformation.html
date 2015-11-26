@@ -1,0 +1,67 @@
+            <div class='row'>
+              <div class='col-sm-4'>
+                <div class='alert' ng-class="{'alert-success': !jsonParseError, 'alert-danger': jsonParseError}">
+                  {{ jsonParseError || "Good JSON!" }}
+                
+                </div>
+              </div>
+              <div class='col-sm-4'>
+                <div class='alert' ng-class="{'alert-success': !fnParseError, 'alert-danger': fnParseError}">
+                  {{ fnParseError || "Good Function!" }}
+                
+                </div>
+              </div>
+              <div class='col-sm-4'>
+                <div class='alert alert-info'>Results</div>
+              </div>
+  <div class='row'>
+    <div class='col-sm-4'>
+      <strong>Input</strong>
+    </div>
+    <div class='col-sm-4'>
+      <strong>Transformer</strong> (function(input){ ... })
+    </div>
+    <div class='col-sm-4'>
+      <strong>Output</strong>
+    </div>
+  </div>
+        <div class='row'>
+            <div class='col-sm-4'>
+              <div class='resizable'>
+                    <div ui-ace="{
+  useWrapMode : true,
+  showGutter: true,
+  theme:'twilight',
+  mode: 'json',
+  firstLineNumber: 5,
+  onLoad: aceLoaded,
+  onChange: aceChanged
+}" ng-model='transform.input' class='editor'></div>
+              </div>
+                </div>
+            <div class='col-sm-4'>
+              <div class='resizable'>
+                    <div ui-ace="{
+  useWrapMode : true,
+  showGutter: true,
+  theme:'twilight',
+  mode: 'javascript',
+  firstLineNumber: 5,
+  onLoad: aceLoaded,
+  onChange: aceChanged
+}" ng-model='transform.transformer' class='editor'></div>
+              </div>
+                </div>
+                <div class='col-sm-4'>
+              <div class='resizable'>
+                        <div ui-ace="{
+  useWrapMode : true,
+  showGutter: false,
+  theme:'twilight',
+  mode: 'json',
+  firstLineNumber: 5,
+  onLoad: aceLoaded,
+  onChange: aceChanged
+}" ng-bind='output' class='editor'></div>
+              </div>
+            </div>
