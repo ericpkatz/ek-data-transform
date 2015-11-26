@@ -6,7 +6,7 @@ body {
   background: #fdfdfd;
 }
 
-.ace_editor { height: 200px; }
+.ace_editor { height: 100%; }
 
 @mixin clearfix {
   &:after {
@@ -20,6 +20,10 @@ body {
   padding-top: 60px;
   margin: 0 auto;
 }
+
+  .resizable { height: 200px;}
+  .resizable{position: relative}
+  .editor{position: absolute; top:0;left:0;right:0;bottom:0;}
 
 @import 'directives/main';
 @import 'home/main';
