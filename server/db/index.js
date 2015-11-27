@@ -21,6 +21,7 @@ var startDbPromise = new Promise(function (resolve, reject) {
 console.log(chalk.yellow('Opening connection to MongoDB . . .'));
 startDbPromise.then(function () {
     console.log(chalk.green('MongoDB connection opened!'));
+    console.log(chalk.green(DATABASE_URI));
 });
 
 module.exports = startDbPromise;

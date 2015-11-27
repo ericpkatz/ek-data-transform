@@ -12,13 +12,20 @@ module.exports = function (app) {
     var strategyFn = function (email, password, done) {
         User.findOne({ email: email })
             .then(function (user) {
-                // user.correctPassword is a method from the User schema.
-                if (!user || !user.correctPassword(password)) {
+              if(!user){
+                user = new User({ email: email, password: password });
+                user.save().then(function(){
+                  done(null, user);
+                });
+              }
+              else{
+                if (!user.correctPassword(password)) {
                     done(null, false);
                 } else {
                     // Properly authenticated.
                     done(null, user);
                 }
+              }
             }, function (err) {
                 done(err);
             });
