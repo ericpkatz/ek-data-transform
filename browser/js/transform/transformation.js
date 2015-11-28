@@ -5,7 +5,13 @@ app.directive('transformation', function(){
       transform: '='
     },
     templateUrl: '/js/transform/transformation.html',
-    controller: function($scope, $window){
+    controller: function($scope, $window, $http){
+      $scope.save = function(){
+        $http.post('/api/transformations', $scope.transform)
+          .then(function(transformation){
+            console.log(transformation);
+          });
+      }
       $scope.aceLoaded = function(_editor){
         _editor.$blockScrolling = Infinity;
           $( ".resizable" ).resizable({
