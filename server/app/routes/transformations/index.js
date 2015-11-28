@@ -12,6 +12,13 @@ var ensureAuthenticated = function (req, res, next) {
     }
 };
 
+router.get('/:id', ensureAuthenticated, function (req, res) {
+  Transformation.findById(req.params.id)
+    .then(function(transformation){
+      res.send(transformation);
+    });
+});
+
 router.get('/', ensureAuthenticated, function (req, res) {
   Transformation.find({user: req.user._id})
     .then(function(transformations){
@@ -23,6 +30,7 @@ router.post('/', ensureAuthenticated, function (req, res) {
   var transformation = new Transformation({user: req.user._id});
   transformation.input = req.body.input;
   transformation.transformer = req.body.transformer;
+  transformation.name = req.body.name;
   transformation.save()
     .then(function(transformation){
       res.send(transformation);

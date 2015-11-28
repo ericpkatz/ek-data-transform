@@ -5,11 +5,11 @@ app.directive('transformation', function(){
       transform: '='
     },
     templateUrl: '/js/transform/transformation.html',
-    controller: function($scope, $window, $http){
+    controller: function($scope, $window, $http, $state){
       $scope.save = function(){
         $http.post('/api/transformations', $scope.transform)
-          .then(function(transformation){
-            console.log(transformation);
+          .then(function(result){
+            $state.go('customTransform', { id: result.data._id});
           });
       }
       $scope.aceLoaded = function(_editor){
