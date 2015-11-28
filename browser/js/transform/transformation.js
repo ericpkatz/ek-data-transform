@@ -2,10 +2,15 @@ app.directive('transformation', function(){
   return {
     restrict: 'E',
     scope: {
-      transform: '='
+      transform: '=',
+      user: '=',
+      transformations: '='
     },
     templateUrl: '/js/transform/transformation.html',
     controller: function($scope, $window, $http, $state){
+      $scope.goToTransformation = function(){
+        $state.go('customTransform', { id: $scope.selected });
+      };
       $scope.save = function(){
         $http.post('/api/transformations', $scope.transform)
           .then(function(result){

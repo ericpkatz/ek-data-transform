@@ -5,6 +5,19 @@ app.config(function ($stateProvider) {
         url: '/transform',
         templateUrl: 'js/transform/transform.html',
         resolve: {
+          user: function(AuthService){
+            return AuthService.getLoggedInUser();
+          },
+          transformations: function(AuthService, $http){
+            return AuthService.getLoggedInUser()
+              .then(function(user){
+                if(user)
+                  return $http.get('/api/transformations')
+                    .then(function(result){
+                      return result.data;
+                    });
+              });
+          },
           transformation: function(){
             var input = [
               {
@@ -26,7 +39,9 @@ app.config(function ($stateProvider) {
             };
           }
         },
-        controller: function($scope, transformation){
+        controller: function($scope, transformation, user, transformations){
+          $scope.transformations = transformations;
+          $scope.user = user;
           $scope.transform = transformation;
         }
     })
@@ -39,10 +54,21 @@ app.config(function ($stateProvider) {
             .then(function(result){
               return result.data;
             });
+        },
+        transformations: function(AuthService, $http){
+          return AuthService.getLoggedInUser()
+            .then(function(user){
+              if(user)
+                return $http.get('/api/transformations')
+                  .then(function(result){
+                    return result.data;
+                  });
+            });
         }
       },
-      controller: function($scope, transformation){
+      controller: function($scope, transformation, transformations){
         $scope.transform = transformation;
+        $scope.transformations = transformations;
       }
   });
 

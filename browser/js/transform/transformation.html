@@ -66,11 +66,14 @@
               </div>
             </div>
 
- <div class='row' ng-hide='transform._id'>
+            {{ selected }}
+ <select class='form-control' ng-options="transformation._id as transformation.name for transformation in transformations" ng-model="selected"></select>
+ <button class='btn btn-primary' ng-click='goToTransformation()'>Go</button>
+ <div class='row' ng-hide='transform._id || !user'>
    <div class='col-sm-4'>
      <input style='margin-top: 10px' class='form-control' ng-model='transform.name' />
    </div>
    <div class='col-sm-2'>
-     <button style='margin-top: 10px' ng-click='save()' class='btn btn-primary'>Save Transformation</button>
+     <button style='margin-top: 10px' ng-disabled='!transform.name' ng-click='save()' class='btn btn-primary'>Save Transformation</button>
    </div>
  </div>
