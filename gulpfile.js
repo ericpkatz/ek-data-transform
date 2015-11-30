@@ -17,6 +17,9 @@ var eslint = require('gulp-eslint');
 var mocha = require('gulp-mocha');
 var karma = require('karma').server;
 var istanbul = require('gulp-istanbul');
+var db = require('./server/db');
+var models = require('./server/db/models');
+var mongoose = require('mongoose');
 
 // Development tasks
 // --------------------------------------------------------------
@@ -24,6 +27,35 @@ var istanbul = require('gulp-istanbul');
 // Live reload business.
 gulp.task('reload', function () {
     livereload.reload();
+});
+
+gulp.task('seed', function(){
+  var Transformation;
+  db.then(function(){
+    Transformation = mongoose.model('Transformation');
+    return Transformation.remove();
+  })
+  .then(function(){
+    var transformations = [
+      {
+        name: 'Foo Bar',
+        input: JSON.stringify([{
+          name: 'Foo',
+          id: 1
+        
+        }, {
+          name: 'Bar',
+          id: 2
+        }]),
+        transformation: 'return items;'
+      }
+    ];
+    return Transformation.create(transformations);
+  })
+  .then(function(data){
+    console.log(data);
+  });
+
 });
 
 gulp.task('reloadCSS', function () {

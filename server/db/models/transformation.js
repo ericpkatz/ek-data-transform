@@ -11,6 +11,9 @@ var schema = new mongoose.Schema({
     transformer: {
         type: String
     },
+    shared: {
+      type: Boolean, default: true 
+    }, 
     user: {
       type: mongoose.Schema.Types.ObjectId, ref: 'User'
     }
