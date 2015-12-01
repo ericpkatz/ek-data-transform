@@ -8,7 +8,7 @@
   "main": "server/start.js",
   "scripts": {
     "start": "nodemon --watch server -e js,html server/start.js",
-    "postinstall": "gulp build && bower install && gulp seed"
+    "postinstall": "gulp build && bower install"
   },
   "dependencies": {
     "angular": "^1.4.0",
