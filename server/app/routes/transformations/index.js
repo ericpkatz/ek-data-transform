@@ -12,7 +12,14 @@ var ensureAuthenticated = function (req, res, next) {
     }
 };
 
-router.get('/:id', ensureAuthenticated, function (req, res) {
+router.get('/shared', function (req, res) {
+  Transformation.find({ shared: true })
+    .then(function(transformations){
+      res.send(transformations);
+    });
+});
+
+router.get('/:id', function (req, res) {
   Transformation.findById(req.params.id)
     .then(function(transformation){
       res.send(transformation);

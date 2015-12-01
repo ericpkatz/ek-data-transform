@@ -16,59 +16,33 @@ app.config(function ($stateProvider) {
                     .then(function(result){
                       return result.data;
                     });
+                else
+                  return $http.get('/api/transformations/shared')
+                    .then(function(result){
+                      return result.data;
+                    });
               });
-          },
-          transformation: function(){
-            var input = [
-              {
-                name: 'foo',
-                active: true
-              
-              },
-              {
-                name: 'bar',
-                active: false 
-              },
-              {
-                name: 'boo'
-              }
-            ];
-            return {
-              input: JSON.stringify(input),
-              transformer: 'return input.map(function(item){ return item.name; });'
-            };
           }
         },
-        controller: function($scope, transformation, user, transformations){
+        controller: function($scope, user, transformations){
+          console.log(transformations);
           $scope.transformations = transformations;
           $scope.user = user;
-          $scope.transform = transformation;
         }
     })
-    .state('customTransform', {
-      url: '/transform/:id',
-      templateUrl: 'js/transform/transform.html',
+    .state('transform.detail', {
+      url: '/:id',
+      template: "<transformation transform='transform'></transformation>",
       resolve: {
         transformation: function($http, $stateParams){
           return $http.get('/api/transformations/' + $stateParams.id) 
             .then(function(result){
               return result.data;
             });
-        },
-        transformations: function(AuthService, $http){
-          return AuthService.getLoggedInUser()
-            .then(function(user){
-              if(user)
-                return $http.get('/api/transformations')
-                  .then(function(result){
-                    return result.data;
-                  });
-            });
         }
       },
-      controller: function($scope, transformation, transformations){
+      controller: function($scope, transformation){
         $scope.transform = transformation;
-        $scope.transformations = transformations;
       }
   });
 

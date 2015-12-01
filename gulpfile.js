@@ -47,7 +47,19 @@ gulp.task('seed', function(){
           name: 'Bar',
           id: 2
         }]),
-        transformation: 'return items;'
+        transformer: 'return input;'
+      },
+      {
+        name: 'Bizz Buzz',
+        input: JSON.stringify([{
+          name: 'Bizz',
+          id: 1
+        
+        }, {
+          name: 'Buzz',
+          id: 2
+        }]),
+        transformer: 'return input;'
       }
     ];
     return Transformation.create(transformations);

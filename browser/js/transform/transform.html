@@ -1,5 +1,10 @@
 <section id="transform">
-  <div class='well'>Put Chooser Here - get global items</div>
-  <h2>{{ transform.name }}</h2>
-  <transformation user='user' transform='transform' transformations='transformations'></transformation>
+  <div class='well'>
+    <ul class='nav nav-tabs'>
+      <li ui-sref-active='active' ng-repeat='transformation in transformations'>
+        <a ui-sref='transform.detail({id: transformation._id})'>{{ transformation.name }}</a>
+      </li>
+    </ul>
+  </div>
+  <div ui-view></div>
 </section>
