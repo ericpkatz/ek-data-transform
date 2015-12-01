@@ -66,6 +66,7 @@ gulp.task('seed', function(){
   })
   .then(function(data){
     console.log(data);
+    mongoose.disconnect();
   });
 
 });
