@@ -17,7 +17,6 @@ var eslint = require('gulp-eslint');
 var mocha = require('gulp-mocha');
 var karma = require('karma').server;
 var istanbul = require('gulp-istanbul');
-var db = require('./server/db');
 var models = require('./server/db/models');
 var mongoose = require('mongoose');
 
@@ -30,6 +29,7 @@ gulp.task('reload', function () {
 });
 
 gulp.task('seed', function(){
+  var db = require('./server/db');
   var Transformation;
   db.then(function(){
     Transformation = mongoose.model('Transformation');
