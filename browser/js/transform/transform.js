@@ -8,32 +8,22 @@ app.config(function ($stateProvider) {
           user: function(AuthService){
             return AuthService.getLoggedInUser();
           },
-          transformations: function(AuthService, $http){
-            return AuthService.getLoggedInUser()
-              .then(function(user){
-                if(user)
-                  return $http.get('/api/transformations')
-                    .then(function(result){
-                      return result.data;
-                    });
-                else
-                  return $http.get('/api/transformations/shared')
-                    .then(function(result){
-                      return result.data;
-                    });
-              });
+          transformations: function(AuthService, $http, TransformationFactory){
+            return TransformationFactory.getTransformations();
           }
         },
         controller: function($scope, user, transformations){
-          console.log(transformations);
           $scope.transformations = transformations;
           $scope.user = user;
         }
     })
     .state('transform.detail', {
       url: '/:id',
-      template: "<transformation transform='transform'></transformation>",
+      template: "<transformation user='user' transform='transform'></transformation>",
       resolve: {
+        user: function(AuthService){
+          return AuthService.getLoggedInUser();
+        },
         transformation: function($http, $stateParams){
           return $http.get('/api/transformations/' + $stateParams.id) 
             .then(function(result){
@@ -41,8 +31,9 @@ app.config(function ($stateProvider) {
             });
         }
       },
-      controller: function($scope, transformation){
+      controller: function($scope, transformation, user){
         $scope.transform = transformation;
+        $scope.user = user;
       }
   });
 

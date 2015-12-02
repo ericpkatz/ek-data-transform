@@ -12,7 +12,7 @@ var schema = new mongoose.Schema({
         type: String
     },
     shared: {
-      type: Boolean, default: true 
+      type: Boolean, default: false 
     }, 
     user: {
       type: mongoose.Schema.Types.ObjectId, ref: 'User'

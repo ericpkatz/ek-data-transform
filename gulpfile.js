@@ -47,7 +47,8 @@ gulp.task('seed', function(){
           name: 'Bar',
           id: 2
         }]),
-        transformer: 'return input;'
+        transformer: 'return input;',
+        shared: true
       },
       {
         name: 'Bizz Buzz',
@@ -59,6 +60,7 @@ gulp.task('seed', function(){
           name: 'Buzz',
           id: 2
         }]),
+        shared: true,
         transformer: 'return input;'
       }
     ];

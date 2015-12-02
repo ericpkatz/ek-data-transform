@@ -6,7 +6,26 @@ app.directive('transformation', function(){
       user: '='
     },
     templateUrl: '/js/transform/transformation.html',
-    controller: function($scope, $window, $http, $state){
+    controller: function($scope, $window, $http, $state, TransformationFactory){
+      $scope.addTransformation = function(t){
+        TransformationFactory.addTransformation(t)
+          .then(function(transformation){
+            $state.go('transform.detail', { id: transformation._id});
+          });
+      };
+
+      $scope.updateTransformation = function(t){
+        TransformationFactory.updateTransformation($scope.transform)
+          .then(function(transformation){
+          });
+      };
+
+      $scope.removeTransformation = function(t){
+        TransformationFactory.removeTransformation($scope.transform)
+          .then(function(transformation){
+            $state.go('transform');
+          });
+      };
       $scope.save = function(){
         $http.post('/api/transformations', $scope.transform)
           .then(function(result){

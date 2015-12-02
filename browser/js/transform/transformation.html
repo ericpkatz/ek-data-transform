@@ -1,19 +1,42 @@
-            <div class='row'>
-              <div class='col-sm-4'>
-                <div class='alert' ng-class="{'alert-success': !jsonParseError, 'alert-danger': jsonParseError}">
-                  {{ jsonParseError || "Good JSON!" }}
-                
-                </div>
-              </div>
-              <div class='col-sm-4'>
-                <div class='alert' ng-class="{'alert-success': !fnParseError, 'alert-danger': fnParseError}">
-                  {{ fnParseError || "Good Function!" }}
-                
-                </div>
-              </div>
-              <div class='col-sm-4'>
-                <div class='alert alert-info'>Results</div>
-              </div>
+<div class='well' ng-if='user'>
+  <div class='form'>
+    <div class='form-group'>
+      <label for='name'>Name</label>
+      <input id='name' class='form-control' ng-model='newTransform.name' />
+    </div>
+  <button class='btn btn-primary' ng-click='addTransformation(newTransform)' ng-disabled='!newTransform.name'>
+    Create New
+  </button>
+  </div>
+  <div class='form' ng-if='!transform.shared'>
+    <div class='form-group'>
+      <label for='name'>Name</label>
+      <input id='name' class='form-control' ng-model='transform.name' />
+    </div>
+  <button class='btn btn-primary' ng-click='updateTransformation()' ng-disabled='transform.shared'>
+    Save
+  </button>
+  <button class='btn btn-warning' ng-if='!transform.shared' ng-click='removeTransformation()'>
+    Delete
+  </button>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-sm-4'>
+    <div class='alert' ng-class="{'alert-success': !jsonParseError, 'alert-danger': jsonParseError}">
+      {{ jsonParseError || "Good JSON!" }}
+    
+    </div>
+  </div>
+  <div class='col-sm-4'>
+    <div class='alert' ng-class="{'alert-success': !fnParseError, 'alert-danger': fnParseError}">
+      {{ fnParseError || "Good Function!" }}
+    
+    </div>
+  </div>
+  <div class='col-sm-4'>
+    <div class='alert alert-info'>Results</div>
+  </div>
   <div class='row'>
     <div class='col-sm-4'>
       <strong>Input</strong>
@@ -25,43 +48,43 @@
       <strong>Output</strong>
     </div>
   </div>
-        <div class='row'>
-            <div class='col-sm-4'>
-              <div class='resizable'>
-                    <div ui-ace="{
-  useWrapMode : true,
-  showGutter: true,
-  theme:'twilight',
-  mode: 'json',
-  firstLineNumber: 5,
-  onLoad: aceLoaded,
-  onChange: aceChanged
+<div class='row'>
+    <div class='col-sm-4'>
+      <div class='resizable'>
+            <div ui-ace="{
+useWrapMode : true,
+showGutter: true,
+theme:'twilight',
+mode: 'json',
+firstLineNumber: 5,
+onLoad: aceLoaded,
+onChange: aceChanged
 }" ng-model='transform.input' class='editor'></div>
-              </div>
-                </div>
-            <div class='col-sm-4'>
-              <div class='resizable'>
-                    <div ui-ace="{
-  useWrapMode : true,
-  showGutter: true,
-  theme:'twilight',
-  mode: 'javascript',
-  firstLineNumber: 5,
-  onLoad: aceLoaded,
-  onChange: aceChanged
+      </div>
+        </div>
+    <div class='col-sm-4'>
+      <div class='resizable'>
+            <div ui-ace="{
+useWrapMode : true,
+showGutter: true,
+theme:'twilight',
+mode: 'javascript',
+firstLineNumber: 5,
+onLoad: aceLoaded,
+onChange: aceChanged
 }" ng-model='transform.transformer' class='editor'></div>
-              </div>
-                </div>
-                <div class='col-sm-4'>
-              <div class='resizable'>
-                        <div ui-ace="{
-  useWrapMode : true,
-  showGutter: false,
-  theme:'twilight',
-  mode: 'json',
-  firstLineNumber: 5,
-  onLoad: aceLoaded,
-  onChange: aceChanged
+      </div>
+        </div>
+        <div class='col-sm-4'>
+      <div class='resizable'>
+                <div ui-ace="{
+useWrapMode : true,
+showGutter: false,
+theme:'twilight',
+mode: 'json',
+firstLineNumber: 5,
+onLoad: aceLoaded,
+onChange: aceChanged
 }" ng-bind='output' class='editor'></div>
-              </div>
-            </div>
+      </div>
+    </div>

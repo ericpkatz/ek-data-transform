@@ -26,8 +26,30 @@ router.get('/:id', function (req, res) {
     });
 });
 
+router.delete('/:id', function (req, res) {
+  Transformation.findById(req.params.id)
+    .then(function(transformation){
+      return transformation.remove();
+    })
+    .then(function(){
+      return res.send(204); 
+    });
+});
+
+router.put('/:id', function (req, res) {
+  Transformation.findById(req.params.id)
+    .then(function(transformation){
+      transformation.input = req.body.input;
+      transformation.transformer = req.body.transformer;
+      return transformation.save();
+    })
+    .then(function(transformation){
+      return res.send(transformation); 
+    });
+});
+
 router.get('/', ensureAuthenticated, function (req, res) {
-  Transformation.find({user: req.user._id})
+  Transformation.find({ $or: [{user: req.user._id}, { shared: true}]})
     .then(function(transformations){
       res.send(transformations);
     });
