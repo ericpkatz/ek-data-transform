@@ -12,7 +12,9 @@ app.config(function ($stateProvider) {
             return TransformationFactory.getTransformations();
           }
         },
-        controller: function($scope, user, transformations){
+        controller: function($stateParams, $scope, user, transformations, $state, $location){
+          if($state.current.name !== 'transform.detail')
+            $state.go('transform.detail', { id: transformations[0]._id});
           $scope.transformations = transformations;
           $scope.user = user;
         }
