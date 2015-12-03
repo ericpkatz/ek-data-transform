@@ -12,6 +12,9 @@ app.directive('transformation', function(){
           templateUrl: '/js/transform/new.html',
           scope: $scope,
           controller: function($scope, $modalInstance){
+            $scope.cancel = function(){
+              $modalInstance.close();
+            };
             $scope.create = function(t){
               TransformationFactory.addTransformation(t)
                 .then(function(transformation){
@@ -29,6 +32,9 @@ app.directive('transformation', function(){
           templateUrl: '/js/transform/edit.html',
           scope: $scope,
           controller: function($scope, $modalInstance){
+            $scope.cancel = function(){
+              $modalInstance.close();
+            };
       $scope.remove = function(t){
         TransformationFactory.removeTransformation($scope.transform)
           .then(function(transformation){
