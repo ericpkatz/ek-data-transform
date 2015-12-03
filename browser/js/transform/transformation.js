@@ -6,32 +6,52 @@ app.directive('transformation', function(){
       user: '='
     },
     templateUrl: '/js/transform/transformation.html',
-    controller: function($scope, $window, $http, $state, TransformationFactory){
-      $scope.addTransformation = function(t){
-        TransformationFactory.addTransformation(t)
-          .then(function(transformation){
-            $state.go('transform.detail', { id: transformation._id});
-          });
+    controller: function($scope, $window, $http, $state, TransformationFactory, $modal){
+      $scope.openCreate = function(){
+        $modal.open({
+          templateUrl: '/js/transform/new.html',
+          scope: $scope,
+          controller: function($scope, $modalInstance){
+            $scope.create = function(t){
+              TransformationFactory.addTransformation(t)
+                .then(function(transformation){
+                  $state.go('transform.detail', { id: transformation._id});
+                });
+              $modalInstance.close();
+            }
+          
+          }
+        });
       };
 
-      $scope.updateTransformation = function(t){
-        TransformationFactory.updateTransformation($scope.transform)
-          .then(function(transformation){
-          });
-      };
-
-      $scope.removeTransformation = function(t){
+      $scope.openEdit = function(){
+        $modal.open({
+          templateUrl: '/js/transform/edit.html',
+          scope: $scope,
+          controller: function($scope, $modalInstance){
+      $scope.remove = function(t){
         TransformationFactory.removeTransformation($scope.transform)
           .then(function(transformation){
+            $modalInstance.close();
             $state.go('transform');
           });
       };
-      $scope.save = function(){
-        $http.post('/api/transformations', $scope.transform)
-          .then(function(result){
-            $state.go('customTransform', { id: result.data._id});
+            $scope.save = function(t){
+        TransformationFactory.updateTransformation($scope.transform)
+          .then(function(transformation){
           });
-      }
+              $modalInstance.close();
+            }
+          
+          }
+        });
+      };
+
+
+
+      $scope.updateTransformation = function(t){
+      };
+
       $scope.aceLoaded = function(_editor){
         _editor.$blockScrolling = Infinity;
           $( ".resizable" ).resizable({

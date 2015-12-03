@@ -1,26 +1,8 @@
-<div class='well' ng-if='user'>
-  <div class='form'>
-    <div class='form-group'>
-      <label for='name'>Name</label>
-      <input id='name' class='form-control' ng-model='newTransform.name' />
-    </div>
-  <button class='btn btn-primary' ng-click='addTransformation(newTransform)' ng-disabled='!newTransform.name'>
-    Create New
-  </button>
+<div style='margin-bottom:10px'>
+  <button ng-if='user' class='btn btn-primary' ng-click='openCreate()'>Create New</button>
+
+  <button class='btn btn-primary' ng-click='openEdit()' ng-if='user && !transform.shared'>Edit</button>
   </div>
-  <div class='form' ng-if='!transform.shared'>
-    <div class='form-group'>
-      <label for='name'>Name</label>
-      <input id='name' class='form-control' ng-model='transform.name' />
-    </div>
-  <button class='btn btn-primary' ng-click='updateTransformation()' ng-disabled='transform.shared'>
-    Save
-  </button>
-  <button class='btn btn-warning' ng-if='!transform.shared' ng-click='removeTransformation()'>
-    Delete
-  </button>
-  </div>
-</div>
 <div class='row'>
   <div class='col-sm-4'>
     <div class='alert' ng-class="{'alert-success': !jsonParseError, 'alert-danger': jsonParseError}">
