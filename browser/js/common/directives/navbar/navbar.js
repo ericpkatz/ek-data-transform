@@ -7,7 +7,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
         link: function (scope) {
 
             scope.items = [
-                { label: 'Transform', state: 'transform' }
+                { label: 'Transform', state: 'transform.empty' }
             ];
 
             scope.user = null;
@@ -18,7 +18,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
 
             scope.logout = function () {
                 AuthService.logout().then(function () {
-                   $state.go('transform');
+                   $state.go('transform.empty', {}, {reload: true});
                 });
             };
 

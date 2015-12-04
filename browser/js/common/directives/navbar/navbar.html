@@ -16,9 +16,12 @@
             </li>
         </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li class='navbar-text' ng-show="user" class="welcome">
+                Welcome, {{ user.email }}!
+        </li>
         <li ng-show="user" class="welcome">
-            <span>Welcome, {{ user.email }}!</span>
-            <a ng-click="logout()">Logout</a>
+            <a ng-click="logout()">
+              Logout</a>
         </li>
         <li><a ng-show="!user" ui-sref="login"> Login</a></li>
       </ul>

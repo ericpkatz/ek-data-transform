@@ -39,7 +39,7 @@ app.directive('transformation', function(){
         TransformationFactory.removeTransformation($scope.transform)
           .then(function(transformation){
             $modalInstance.close();
-            $state.go('transform');
+            $state.go('transform.empty');
           });
       };
             $scope.save = function(t){
