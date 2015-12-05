@@ -4,6 +4,16 @@ var mongoose = require('mongoose');
 var Transformation = mongoose.model('Transformation');
 module.exports = router;
 
+var yoursOrShared = function(req, res, next){
+  Transformation.findById(req.params.id)
+    .then(function(transformation){
+      if(transformation.shared || (req.user && transformation.user.toString() == req.user._id.toString()))
+        next();
+      else{
+        res.status(401).end();
+      }
+    });
+};
 var ensureAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
         next();
@@ -19,7 +29,7 @@ router.get('/shared', function (req, res) {
     });
 });
 
-router.get('/:id', function (req, res) {
+router.get('/:id', yoursOrShared, function (req, res) {
   Transformation.findById(req.params.id)
     .then(function(transformation){
       res.send(transformation);

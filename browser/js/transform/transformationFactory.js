@@ -1,5 +1,10 @@
-app.factory('TransformationFactory', function(AuthService, $http){
+app.factory('TransformationFactory', function(AuthService, $http, $rootScope, AUTH_EVENTS){
   var _transformations;
+  $rootScope.$on(AUTH_EVENTS.logoutSuccess, function(){
+    for(var i = _transformations.length -1; i >= 0; i--)
+      if(!_transformations[i].shared)
+        _transformations.splice(i, 1);
+    });
   return {
     getTransformations: getTransformations,
     addTransformation: function(transformation){

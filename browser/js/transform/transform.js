@@ -21,7 +21,6 @@ app.config(function ($stateProvider) {
     })
     .state('transform.empty', {
       url: '',
-      //template: "<transformation user='user' transform='transform'></transformation>",
       resolve: {
         transformations: function($state){
           return _transformationPromise
