@@ -7,6 +7,7 @@ app.directive('transformation', function(){
     },
     templateUrl: '/js/transform/transformation.html',
     controller: function($scope, $window, $http, $state, TransformationFactory, $modal){
+      var _output;
       $scope.openCreate = function(){
         $modal.open({
           templateUrl: '/js/transform/new.html',
@@ -21,8 +22,7 @@ app.directive('transformation', function(){
                   $state.go('transform.detail', { id: transformation._id});
                 });
               $modalInstance.close();
-            }
-          
+            };
           }
         });
       };
@@ -59,13 +59,15 @@ app.directive('transformation', function(){
       };
 
       $scope.aceLoaded = function(_editor){
+        if(_editor.container.id === 'output')
+          _output = _editor;
         _editor.$blockScrolling = Infinity;
           $( ".resizable" ).resizable({
         resize: function( event, ui ) {
           _editor.resize();
         }
-      });
-      }
+      })
+      };
 
       $scope.aceChanged = function(a){
         if([';','}'].indexOf(a[0].lines[0]) !== -1 || !a[1].formatted)
@@ -76,7 +78,6 @@ app.directive('transformation', function(){
           if(js !== formattedJS)
             a[1].setValue(formattedJS, 1);
         }
-      
       };
       
       $scope.$watch('transform.input', function(val){
@@ -109,7 +110,7 @@ app.directive('transformation', function(){
         catch(ex){
           $scope.fnParseError = ex.toString();
         }
-        $scope.output = results;
+        _output.setValue($window.beautify(results), 1);
       };
 
     }

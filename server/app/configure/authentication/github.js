@@ -15,6 +15,7 @@ module.exports = function (app) {
     };
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
+      console.log(profile.emails[0].value);
 
         UserModel.findOne({ 'github.id': profile.id }).exec()
             .then(function (user) {
@@ -24,8 +25,9 @@ module.exports = function (app) {
                 } else {
                     return UserModel.create({
                         github: {
-                            id: profile.id
-                        }
+                            id: profile.id,
+                        },
+                        email: profile.emails[0].value
                     });
                 }
 

@@ -59,14 +59,14 @@ onChange: aceChanged
         </div>
         <div class='col-sm-4'>
       <div class='resizable'>
-                <div ui-ace="{
+                <div id='output' ui-ace="{
 useWrapMode : true,
-showGutter: false,
+showGutter: true,
 theme:'twilight',
 mode: 'json',
 firstLineNumber: 5,
 onLoad: aceLoaded,
 onChange: aceChanged
-}" ng-bind='output' class='editor'></div>
+}" class='editor output'></div>
       </div>
     </div>
