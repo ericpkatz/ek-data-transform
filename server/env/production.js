@@ -14,6 +14,11 @@ module.exports = {
         "consumerSecret": process.env.TWITTER_CONSUMER_SECRET,
         "callbackUrl": process.env.TWITTER_CALLBACK
     },
+    "GITHUB": {
+      "clientID": process.env.GITHUB_CLIENT_ID,
+      "clientSecret": process.env.GITHUB_CLIENT_SECRET,
+      "callbackUrl": process.env.GITHUB_CALLBACK_URL 
+    },
     "FACEBOOK": {
         "clientID": process.env.FACEBOOK_APP_ID,
         "clientSecret": process.env.FACEBOOK_CLIENT_SECRET,
