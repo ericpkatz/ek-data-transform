@@ -1,24 +1,23 @@
 <div style='margin-bottom:10px'>
-  <button ng-if='user' class='btn btn-primary' ng-click='openCreate()'>Create New</button>
-
-  <button class='btn btn-primary' ng-click='openEdit()' ng-if='user && !transform.shared'>Edit / Delete</button>
+  <button ng-if='user' class='btn btn-primary' ng-click='openCreate()'>Create New 
+    <span class='glyphicon glyphicon-plus-sign'></span>
+  </button>
+  <button class='btn btn-default' ng-click='openEdit()' ng-if='user && !transform.shared'>Edit Name / Delete
+    <span class='glyphicon glyphicon-edit'></span>
+  </button>
   </div>
 <div class='row'>
   <div class='col-sm-4'>
-    <div class='alert' ng-class="{'alert-success': !jsonParseError, 'alert-danger': jsonParseError}">
-      {{ jsonParseError || "Good JSON!" }}
-    
-    </div>
+    <h2 title='{{jsonParseError}}' ng-class="{'text-success': !jsonParseError, 'text-danger': jsonParseError}">
+      <span  ng-class="{'glyphicon-ok-sign': !jsonParseError, 'glyphicon-remove-sign': jsonParseError}" class="glyphicon"></span>
+    </h2>
   </div>
   <div class='col-sm-4'>
-    <div class='alert' ng-class="{'alert-success': !fnParseError, 'alert-danger': fnParseError}">
-      {{ fnParseError || "Good Function!" }}
-    
-    </div>
+    <h2 title='{{fnParseError}}' ng-class="{'text-success': !fnParseError, 'text-danger': fnParseError}">
+      <span  ng-class="{'glyphicon-ok-sign': !fnParseError, 'glyphicon-remove-sign': fnParseError}" class="glyphicon"></span>
+    </h2>
   </div>
-  <div class='col-sm-4'>
-    <div class='alert alert-info'>Results</div>
-  </div>
+</div>
   <div class='row'>
     <div class='col-sm-4'>
       <strong>Input</strong>
@@ -59,7 +58,7 @@ onChange: aceChanged
         </div>
         <div class='col-sm-4'>
       <div class='resizable'>
-                <div id='output' ui-ace="{
+                <div id='output' readonly ui-ace="{
 useWrapMode : true,
 showGutter: true,
 theme:'twilight',

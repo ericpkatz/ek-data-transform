@@ -106,11 +106,16 @@ app.directive('transformation', function(){
         try {
           var fn = new Function('input', $scope.transform.transformer);
           results = JSON.stringify(fn(input));
+          _output.setValue($window.beautify(results), 1);
+          if(!$scope.transform.shared)
+            TransformationFactory.updateTransformation($scope.transform)
+              .then(function(transformation){
+                console.log('saved');
+              });
         }
         catch(ex){
           $scope.fnParseError = ex.toString();
         }
-        _output.setValue($window.beautify(results), 1);
       };
 
     }

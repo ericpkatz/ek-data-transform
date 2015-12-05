@@ -49,6 +49,7 @@ router.delete('/:id', function (req, res) {
 router.put('/:id', function (req, res) {
   Transformation.findById(req.params.id)
     .then(function(transformation){
+      transformation.name = req.body.name;
       transformation.input = req.body.input;
       transformation.transformer = req.body.transformer;
       return transformation.save();
@@ -60,6 +61,7 @@ router.put('/:id', function (req, res) {
 
 router.get('/', ensureAuthenticated, function (req, res) {
   Transformation.find({ $or: [{user: req.user._id}, { shared: true}]})
+    .sort('shared')
     .then(function(transformations){
       res.send(transformations);
     });
