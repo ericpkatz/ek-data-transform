@@ -8,6 +8,24 @@ app.directive('transformation', function(){
     templateUrl: '/js/transform/transformation.html',
     controller: function($scope, $window, $http, $state, TransformationFactory, $modal){
       var _output;
+      $scope.makeCopy = function(){
+              TransformationFactory.copyTransformation(angular.copy($scope.transform))
+                .then(function(transformation){
+                  $state.go('transform.detail', { id: transformation._id});
+                });
+      };
+      $scope.remove = function(t){
+        TransformationFactory.removeTransformation($scope.transform)
+          .then(function(transformation){
+            $state.go('transform.empty');
+          });
+      };
+      $scope.makeCopy = function(){
+              TransformationFactory.copyTransformation(angular.copy($scope.transform))
+                .then(function(transformation){
+                  $state.go('transform.detail', { id: transformation._id});
+                });
+      };
       $scope.openCreate = function(){
         $modal.open({
           templateUrl: '/js/transform/new.html',
@@ -35,13 +53,6 @@ app.directive('transformation', function(){
             $scope.cancel = function(){
               $modalInstance.close();
             };
-      $scope.remove = function(t){
-        TransformationFactory.removeTransformation($scope.transform)
-          .then(function(transformation){
-            $modalInstance.close();
-            $state.go('transform.empty');
-          });
-      };
             $scope.save = function(t){
         TransformationFactory.updateTransformation($scope.transform)
           .then(function(transformation){

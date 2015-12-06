@@ -11,11 +11,12 @@ module.exports = function (app) {
     var githubCredentials = {
         clientID: githubConfig.clientID,
         clientSecret: githubConfig.clientSecret,
-        callbackURL: githubConfig.callbackURL
+        callbackURL: githubConfig.callbackURL,
+        scope: ['user', 'gist']
     };
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
-      console.log(profile.emails[0].value);
+      console.log(JSON.stringify(profile));
 
         UserModel.findOne({ 'github.id': profile.id }).exec()
             .then(function (user) {

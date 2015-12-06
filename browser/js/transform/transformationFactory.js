@@ -16,6 +16,14 @@ app.factory('TransformationFactory', function(AuthService, $http, $rootScope, AU
           return result.data;
         });
     },
+    copyTransformation: function(transformation){
+      transformation.name = transformation.name + ' copy';
+      return $http.post('/api/transformations', transformation)
+        .then(function(result){
+          _transformations.push(result.data);
+          return result.data;
+        });
+    },
     removeTransformation: function(transformation){
       return $http.delete('/api/transformations/' + transformation._id)
         .then(function(result){

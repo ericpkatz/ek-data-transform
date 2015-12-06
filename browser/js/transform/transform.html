@@ -1,7 +1,7 @@
 <section id="transform">
   <ul class='nav nav-tabs' style='margin-bottom: 10px'>
     <li ui-sref-active='active' ng-repeat='transformation in transformations'>
-      <a ui-sref='transform.detail({id: transformation._id})'>{{ transformation.name }}</a>
+      <a ui-sref='transform.detail({id: transformation._id})'>{{ transformation.name }} <span class='glyphicon glyphicon-globe' ng-show='transformation.shared'></span></a>
     </li>
   </ul>
   <div ui-view></div>

@@ -2,68 +2,80 @@
   <button ng-if='user' class='btn btn-primary' ng-click='openCreate()'>Create New 
     <span class='glyphicon glyphicon-plus-sign'></span>
   </button>
-  <button class='btn btn-default' ng-click='openEdit()' ng-if='user && !transform.shared'>Edit Name / Delete
+  <button class='btn btn-default' ng-click='openEdit()' ng-if='user && !transform.shared'>Edit
     <span class='glyphicon glyphicon-edit'></span>
+  </button>
+  <button ng-if='user' class='btn btn-default' ng-click='makeCopy()'>Copy this Transformation 
+    <span class='glyphicon glyphicon-duplicate'></span>
+  </button>
+  <button class='btn btn-warning' ng-click='remove()' ng-if='user && !transform.shared'>Delete
+    <span class='glyphicon glyphicon-trash'></span>
   </button>
   </div>
 <div class='row'>
-  <div class='col-sm-4'>
+  <div class='col-sm-12'>
     <h2 title='{{jsonParseError}}' ng-class="{'text-success': !jsonParseError, 'text-danger': jsonParseError}">
-      <span  ng-class="{'glyphicon-ok-sign': !jsonParseError, 'glyphicon-remove-sign': jsonParseError}" class="glyphicon"></span>
-    </h2>
-  </div>
-  <div class='col-sm-4'>
-    <h2 title='{{fnParseError}}' ng-class="{'text-success': !fnParseError, 'text-danger': fnParseError}">
-      <span  ng-class="{'glyphicon-ok-sign': !fnParseError, 'glyphicon-remove-sign': fnParseError}" class="glyphicon"></span>
+      <span  ng-class="{'glyphicon-ok-sign': !jsonParseError, 'glyphicon-remove-sign': jsonParseError}" class="glyphicon"></span>{{jsonParseError}}
     </h2>
   </div>
 </div>
   <div class='row'>
-    <div class='col-sm-4'>
+    <div class='col-sm-12'>
       <strong>Input</strong>
-    </div>
-    <div class='col-sm-4'>
-      <strong>Transformer</strong> (function(input){ ... })
-    </div>
-    <div class='col-sm-4'>
-      <strong>Output</strong>
     </div>
   </div>
 <div class='row'>
-    <div class='col-sm-4'>
+    <div class='col-sm-12'>
       <div class='resizable'>
             <div ui-ace="{
 useWrapMode : true,
 showGutter: true,
 theme:'twilight',
 mode: 'json',
-firstLineNumber: 5,
+firstLineNumber: 1,
 onLoad: aceLoaded,
 onChange: aceChanged
 }" ng-model='transform.input' class='editor'></div>
       </div>
         </div>
-    <div class='col-sm-4'>
+    </div>
+<div class='row'>
+  <div class='col-sm-6'>
+    <h2 title='{{fnParseError}}' ng-class="{'text-success': !fnParseError, 'text-danger': fnParseError}">
+      <span  ng-class="{'glyphicon-ok-sign': !fnParseError, 'glyphicon-remove-sign': fnParseError}" class="glyphicon"></span>{{fnParseError}}
+    </h2>
+  </div>
+</div>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <strong>Transformer</strong> (function(input){ ... })
+    </div>
+    <div class='col-sm-6'>
+      <strong>Output</strong>
+    </div>
+  </div>
+    <div class='row'>
+    <div class='col-sm-6'>
       <div class='resizable'>
             <div ui-ace="{
 useWrapMode : true,
 showGutter: true,
 theme:'twilight',
 mode: 'javascript',
-firstLineNumber: 5,
+firstLineNumber: 1,
 onLoad: aceLoaded,
 onChange: aceChanged
 }" ng-model='transform.transformer' class='editor'></div>
       </div>
         </div>
-        <div class='col-sm-4'>
+        <div class='col-sm-6'>
       <div class='resizable'>
                 <div id='output' readonly ui-ace="{
 useWrapMode : true,
 showGutter: true,
 theme:'twilight',
 mode: 'json',
-firstLineNumber: 5,
+firstLineNumber: 1,
 onLoad: aceLoaded,
 onChange: aceChanged
 }" class='editor output'></div>
