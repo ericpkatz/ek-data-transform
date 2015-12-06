@@ -52,6 +52,7 @@ router.put('/:id', function (req, res) {
       transformation.name = req.body.name;
       transformation.input = req.body.input;
       transformation.transformer = req.body.transformer;
+      transformation.description = req.body.description;
       return transformation.save();
     })
     .then(function(transformation){
@@ -72,6 +73,7 @@ router.post('/', ensureAuthenticated, function (req, res) {
   transformation.input = req.body.input;
   transformation.transformer = req.body.transformer;
   transformation.name = req.body.name;
+  transformation.description = req.body.description;
   transformation.save()
     .then(function(transformation){
       res.send(transformation);

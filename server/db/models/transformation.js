@@ -11,6 +11,9 @@ var schema = new mongoose.Schema({
     transformer: {
         type: String
     },
+    description: {
+        type: String
+    },
     shared: {
       type: Boolean, default: false 
     }, 
