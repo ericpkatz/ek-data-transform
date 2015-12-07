@@ -23,7 +23,7 @@
                 Welcome, {{ user.email }}!
         </li>
         <li ng-show="user" class="welcome">
-            <a ng-click="logout()">
+            <a ng-click="logout()" style='cursor:pointer'>
               Logout</a>
         </li>
         <li><a ng-show="!user" href="/auth/github">Login (Github)</a></li>
