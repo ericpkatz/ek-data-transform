@@ -6,6 +6,12 @@ app.factory('TransformationFactory', function(AuthService, $http, $rootScope, AU
         _transformations.splice(i, 1);
     });
   return {
+    postToGist: function(transformation){
+      return $http.post('/api/transformations/postToGist', transformation)
+        .then(function(result){
+          return result.data;
+        });
+    },
     getTransformations: getTransformations,
     addTransformation: function(transformation){
       transformation.input = JSON.stringify(['abc', 'def']);

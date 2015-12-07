@@ -21,6 +21,29 @@
 </head>
 <body ng-app="app">
     <navbar></navbar>
+    <div class='container'>
+    <alert class='alert' type='info'>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4>How it works?</h4>
+  <div class='row'>
+    <div class='col-sm-6'>
+    <strong>Anyone can...</strong>
+  <ul>
+    <li>Start with some json in Window #1.</li>
+    <li>Write the body of your transformation function in Window #2.</li>
+    <li>See your results in Window #3</li>
+  </ul>
+    </div>
+    <div class='col-sm-6'>
+    <strong>Logged in users can...</strong>
+  <ul>
+    <li>Create their own transformations.</li>
+    <li>Publish their transformation function as a gist.</li>
+  </ul>
+    </div>
+  </div>
+</alert>
+    </div>
     <div id="main" ui-view class='container'></div>
 </body>
 </html>

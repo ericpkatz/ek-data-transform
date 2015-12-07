@@ -2,6 +2,7 @@
 var router = require('express').Router();
 var mongoose = require('mongoose');
 var Transformation = mongoose.model('Transformation');
+var GitHubApi = require('node-github');
 module.exports = router;
 
 var yoursOrShared = function(req, res, next){
@@ -21,6 +22,42 @@ var ensureAuthenticated = function (req, res, next) {
         res.status(401).end();
     }
 };
+
+router.post('/postToGist', function (req, res) {
+  Transformation.findById(req.body._id)
+    .then(function(transform){
+    var github = new GitHubApi({
+      // required
+      version: "3.0.0",
+      // optional
+      debug: true,
+      protocol: "https",
+      host: "api.github.com", // should be api.github.com for GitHub
+      pathPrefix: "/api/v3", // for some GHEs; none for GitHub
+      timeout: 5000,
+      headers: {
+          "user-agent": "My-Cool-GitHub-App" // GitHub is happy with a unique user agent
+      }
+    });
+    github.gists.create({'public': true, 'files': {'transform.js' : {'content': transform.toFunction()}}}, function(err, result){
+      res.send(result);
+  });
+    
+    });
+  /*
+  github.user.getFollowingFromUser({
+    // optional:
+    // headers: {
+    //     "cookie": "blahblah"
+    // },
+    user: "mikedeboer"
+}, function(err, result) {
+    //res.send(req.body);
+    res.send(result);
+    //console.log(JSON.stringify(res));
+});
+*/
+});
 
 router.get('/shared', function (req, res) {
   Transformation.find({ shared: true })

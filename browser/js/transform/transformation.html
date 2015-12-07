@@ -11,20 +11,28 @@
   <button class='btn btn-warning' ng-click='remove()' ng-if='user && !transform.shared'>Delete
     <span class='glyphicon glyphicon-trash'></span>
   </button>
+  <button ng-if='user' class='btn btn-primary' ng-click='postToGist()'>Create Gist 
+    <span class='glyphicon glyphicon-plus-sign'></span>
+  </button>
+  <alert type='success' ng-if='gist' >
+  <a href='{{ gist }}' target='_blank'>{{gist}}</a>
+  </alert>
   </div>
-  <div class='well'>{{ transform.description }}</div>
-<div class='row'>
-  <div class='col-sm-12'>
-    <h2 title='{{jsonParseError}}' ng-class="{'text-success': !jsonParseError, 'text-danger': jsonParseError}">
-      <span  ng-class="{'glyphicon-ok-sign': !jsonParseError, 'glyphicon-remove-sign': jsonParseError}" class="glyphicon"></span>{{jsonParseError}}
-    </h2>
-  </div>
-</div>
+  <p>{{ transform.description }}</p>
   <div class='row'>
     <div class='col-sm-12'>
-      <strong>Input</strong>
+      <strong>
+      Window #1 (Input)
+      </strong>
     </div>
   </div>
+<div class='row'>
+  <div class='col-sm-12'>
+    <p title='{{jsonParseError}}' ng-class="{'text-success': !jsonParseError, 'text-danger': jsonParseError}">
+      <span  ng-class="{'glyphicon-ok-sign': !jsonParseError, 'glyphicon-remove-sign': jsonParseError}" class="glyphicon"></span>{{jsonParseError}}
+    </p>
+  </div>
+</div>
 <div class='row'>
     <div class='col-sm-12'>
       <div class='resizable'>
@@ -40,21 +48,21 @@ onChange: aceChanged
       </div>
         </div>
     </div>
-<div class='row'>
-  <div class='col-sm-6'>
-    <h2 title='{{fnParseError}}' ng-class="{'text-success': !fnParseError, 'text-danger': fnParseError}">
-      <span  ng-class="{'glyphicon-ok-sign': !fnParseError, 'glyphicon-remove-sign': fnParseError}" class="glyphicon"></span>{{fnParseError}}
-    </h2>
-  </div>
-</div>
   <div class='row'>
     <div class='col-sm-6'>
-      <strong>Transformer</strong> (function(input){ ... })
+      <strong>Window #2 - Transformer</strong> (function(<strong>input</strong>){ ... })
     </div>
     <div class='col-sm-6'>
-      <strong>Output</strong>
+      <strong>Window #3 - Output</strong>
     </div>
   </div>
+<div class='row'>
+  <div class='col-sm-6'>
+    <span title='{{fnParseError}}' ng-class="{'text-success': !fnParseError, 'text-danger': fnParseError}">
+      <span  ng-class="{'glyphicon-ok-sign': !fnParseError, 'glyphicon-remove-sign': fnParseError}" class="glyphicon"></span>{{fnParseError}}
+    </span>
+  </div>
+</div>
     <div class='row'>
     <div class='col-sm-6'>
       <div class='resizable'>

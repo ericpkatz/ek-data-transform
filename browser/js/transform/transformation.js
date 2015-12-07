@@ -8,6 +8,13 @@ app.directive('transformation', function(){
     templateUrl: '/js/transform/transformation.html',
     controller: function($scope, $window, $http, $state, TransformationFactory, $modal){
       var _output;
+      
+      $scope.postToGist = function(){
+        TransformationFactory.postToGist($scope.transform)
+          .then(function(result){
+            $scope.gist = result.html_url;
+          });
+      };
       $scope.makeCopy = function(){
               TransformationFactory.copyTransformation(angular.copy($scope.transform))
                 .then(function(transformation){
