@@ -12,7 +12,7 @@ module.exports = function (app) {
         clientID: githubConfig.clientID,
         clientSecret: githubConfig.clientSecret,
         callbackURL: githubConfig.callbackURL,
-        scope: ['user', 'gist']
+        scope: ['user']
     };
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
