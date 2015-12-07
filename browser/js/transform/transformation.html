@@ -11,7 +11,7 @@
   <button class='btn btn-warning' ng-click='remove()' ng-if='user && !transform.shared'>Delete
     <span class='glyphicon glyphicon-trash'></span>
   </button>
-  <button class='btn btn-default' ng-disabled='errors()' ng-click='postToGist()'>Create Gist 
+  <button ng-if='user' class='btn btn-default' ng-disabled='errors()' ng-click='postToGist()'>Create Gist 
     <span class='glyphicon glyphicon-cloud-upload'></span>
   </button>
   <alert style='margin-top:10px' type='success' ng-if='gist' >
