@@ -8,6 +8,11 @@ app.directive('transformation', function(){
     templateUrl: '/js/transform/transformation.html',
     controller: function($scope, $window, $http, $state, TransformationFactory, $modal){
       var _output;
+
+      $scope.errors = function(){
+        return $scope.jsonParseError || $scope.fnParseError;
+      
+      };
       
       $scope.postToGist = function(){
         TransformationFactory.postToGist($scope.transform)

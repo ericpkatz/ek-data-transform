@@ -5,16 +5,16 @@
   <button class='btn btn-default' ng-click='openEdit()' ng-if='user && !transform.shared'>Edit
     <span class='glyphicon glyphicon-edit'></span>
   </button>
-  <button ng-if='user' class='btn btn-default' ng-click='makeCopy()'>Copy this Transformation 
+  <button ng-if='user' ng-disabled='errors()' class='btn btn-default' ng-click='makeCopy()'>Copy this Transformation 
     <span class='glyphicon glyphicon-duplicate'></span>
   </button>
   <button class='btn btn-warning' ng-click='remove()' ng-if='user && !transform.shared'>Delete
     <span class='glyphicon glyphicon-trash'></span>
   </button>
-  <button ng-if='user' class='btn btn-primary' ng-click='postToGist()'>Create Gist 
-    <span class='glyphicon glyphicon-plus-sign'></span>
+  <button class='btn btn-default' ng-disabled='errors()' ng-click='postToGist()'>Create Gist 
+    <span class='glyphicon glyphicon-cloud-upload'></span>
   </button>
-  <alert type='success' ng-if='gist' >
+  <alert style='margin-top:10px' type='success' ng-if='gist' >
   <a href='{{ gist }}' target='_blank'>{{gist}}</a>
   </alert>
   </div>

@@ -7,7 +7,7 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
         link: function (scope) {
 
             scope.items = [
-                { label: 'Transform', state: 'transform.empty' }
+                { label: 'Transform', state: 'transform.empty', icon:'glyphicon glyphicon-filter' }
             ];
 
             scope.user = null;
