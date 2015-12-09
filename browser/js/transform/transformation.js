@@ -6,8 +6,9 @@ app.directive('transformation', function(){
       user: '='
     },
     templateUrl: '/js/transform/transformation.html',
-    controller: function($scope, $window, $http, $state, TransformationFactory, $modal){
+    controller: function($scope, $window, $http, $state, TransformationFactory, $modal, Session){
       var _output;
+      $scope.Session = Session;
 
       $scope.errors = function(){
         return $scope.jsonParseError || $scope.fnParseError;
